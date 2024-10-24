@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 currentVelocity = playerRigidbody.velocity;
 
-        Ray groundCheckRay = new Ray(transform.position, Vector3.down);                             //Added the *LocalScale to account for when the player is being resized
+        Ray groundCheckRay = new Ray(transform.position, Vector3.down);                             //Added the *LocalScale to account for when the player is being resized //!S.S
         isGrounded = Physics.Raycast(groundCheckRay, groundRaycastDistance + (playerCollider.height  * transform.localScale.x / 2f), groundableLayer);
 
 
@@ -106,5 +106,11 @@ public class PlayerMovement : MonoBehaviour
 
 
         playerRigidbody.velocity = currentVelocity;
+    }
+
+
+    //Adding this to get the gravity for power-ups to uses //!S.S
+    public float GetGravityStrength(){
+        return gravityStrength;
     }
 }
