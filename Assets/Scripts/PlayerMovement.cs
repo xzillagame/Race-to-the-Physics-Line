@@ -84,8 +84,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 currentVelocity = playerRigidbody.velocity;
 
-        Ray groundCheckRay = new Ray(transform.position, Vector3.down);
-        isGrounded = Physics.Raycast(groundCheckRay, groundRaycastDistance + (playerCollider.height / 2f), groundableLayer);
+        Ray groundCheckRay = new Ray(transform.position, Vector3.down);                             //Added the *LocalScale to account for when the player is being resized
+        isGrounded = Physics.Raycast(groundCheckRay, groundRaycastDistance + (playerCollider.height  * transform.localScale.x / 2f), groundableLayer);
 
 
         if (!isGrounded)
