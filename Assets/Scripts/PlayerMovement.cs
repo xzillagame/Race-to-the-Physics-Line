@@ -16,12 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private PlayerStatCostants playerStatCostants;
+    [SerializeField] private PlayerObjectReferenceHolder playerObjectReferenceHolder;
 
 
-    [Space(10)]
-    [Header("Movement Values")]
-    [SerializeField] private float movementSpeed = 5f;
-    [SerializeField] private float jumpStrength = 15f;
+    [field: Space(10)]
+    [field: Header("Movement Values")]
+    [field: SerializeField] public float MovementSpeed { get; set; } = 5f;
+    [field: SerializeField] public float JumpStrength { get; set; } = 15f;
     [SerializeField, Range(0, 1)] private float jumpVelocityCancelScaler = 0.25f;
     [SerializeField] private float groundRaycastDistance = .05f;
     [SerializeField] private float gravityStrength = -25f;
@@ -65,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            playerRigidbody.AddForce(playerTransform.up * jumpStrength, ForceMode.VelocityChange);
+            playerRigidbody.AddForce(playerTransform.up * JumpStrength, ForceMode.VelocityChange);
         }
     }
 
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forwardDirectionRelativeToCamera = cameraTransform.forward * inputDirection.y;
         horizontalDirectionRelativeToCamera.y = 0f;
 
-        Vector3 finalCalculatedMovement = (horizontalDirectionRelativeToCamera + forwardDirectionRelativeToCamera).normalized * movementSpeed;
+        Vector3 finalCalculatedMovement = (horizontalDirectionRelativeToCamera + forwardDirectionRelativeToCamera).normalized * MovementSpeed;
 
         finalCalculatedMovement.y = playerRigidbody.velocity.y;
         playerRigidbody.velocity = finalCalculatedMovement;
@@ -107,13 +108,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerTransform = transform;
-        cameraTransform = Camera.main.transform;
     }
 
     private void Start()
     {
-        movementSpeed = playerStatCostants.StartingMovementSpeed;
-        jumpStrength = playerStatCostants.StartingJumpStrength;
+        cameraTransform = playerObjectReferenceHolder.CameraTransform;
+        MovementSpeed = playerStatCostants.StartingMovementSpeed;
+        JumpStrength = playerStatCostants.StartingJumpStrength;
         gravityStrength = playerStatCostants.StartingGravityStrength;
     }
 

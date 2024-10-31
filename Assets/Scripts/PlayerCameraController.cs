@@ -21,6 +21,11 @@ public class PlayerCameraController : MonoBehaviour
         playerMovement.OnGravityChanged += ChangeCameraState;
     }
 
+    private void OnDisable()
+    {
+        playerMovement.OnGravityChanged -= ChangeCameraState;
+    }
+
     private void Start()
     {
         virtualCamera.transform.rotation = Quaternion.Euler(normalGravityCameraAngle, 0f, 0f);
@@ -29,7 +34,6 @@ public class PlayerCameraController : MonoBehaviour
 
     private void ChangeCameraState(PlayerMovement.GravityDirection gravityDirection)
     {
-        Debug.Log("Event called");
         switch (gravityDirection) 
         {
             case PlayerMovement.GravityDirection.GravityDown:
