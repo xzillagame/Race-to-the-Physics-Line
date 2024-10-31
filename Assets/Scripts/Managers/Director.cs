@@ -4,6 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Director : MonoBehaviour{
+    private static bool isGameOver = false;
+    private static PlayerInputHandler[] pInputs;
+
+    private void Start(){
+        pInputs = FindObjectsOfType<PlayerInputHandler>();
+    }
+
+
+    public static void EndGame(){
+        isGameOver = true;
+        //Add stuff to multiplayer
+        foreach(PlayerInputHandler p in pInputs){
+            p.EndGame();
+        }
+        //End the game
+        Debug.Log("Game Over");
+    }
+
     public static float AdjustPotency(){
         //Will get a random number for testing purposes
         int potency = UnityEngine.Random.Range(0, 101);
@@ -23,9 +41,7 @@ public class Director : MonoBehaviour{
             return 2;
         }
     }
-
-    public static 
-    bool IsShrinkValid(float shrinkAmount, GameObject targetObj){
+    public static bool IsShrinkValid(float shrinkAmount, GameObject targetObj){
         //All scales should match, so I just chose to use x
         if ((targetObj.transform.localScale.x - shrinkAmount) <= 0 || targetObj?.GetComponent<PlayerPowerUpManager>().GetShrinkStatus() == true){
             return false;

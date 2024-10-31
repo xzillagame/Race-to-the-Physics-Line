@@ -41,6 +41,12 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput.GroundMovement.Jump.performed -= JumpInput;
     }
 
+    //S.S
+    public void EndGame()
+    {
+        OnDisable();
+    }
+
     private void MoveInput(InputAction.CallbackContext context)
     {
         if(context.performed)
