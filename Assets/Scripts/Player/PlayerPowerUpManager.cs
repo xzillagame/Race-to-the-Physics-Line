@@ -4,32 +4,49 @@ using UnityEngine;
 
 public class PlayerPowerUpManager : MonoBehaviour{
     private bool isShrunk;
-    private bool isInLowWall = false;
-    public void ShrinkSize(float targetSize, float powerUpTimer){
-        //!Already checks this in the power up manager
-        //if(Director.IsShrinkValid(targetSize, gameObject) == true){
-            transform.localScale = new Vector3(targetSize,targetSize,targetSize);
+    private bool resizeValidity = true;
 
-            StartCoroutine(shrinkTimer(powerUpTimer));
-        //}
+    private bool isInverseGravity = false;
+
+
+
+
+
+
+    public void ShrinkSize(float targetSize, float powerUpTimer){
+        isShrunk = true;
+        transform.localScale = new Vector3(targetSize,targetSize,targetSize);
+
+        StartCoroutine(shrinkTimer(powerUpTimer));
         
     }
+    public void FlipGravity(float powerUpTimer, PlayerMovement pMove){
+        //PlayerMovement pMove = gameObject?.GetComponent<PlayerMovement>();
+        if(pMove != null){
+            isInverseGravity = true;
+            pMove.FlipGravity();
+            StartCoroutine(gravityTimer(powerUpTimer, pMove));
+        }
+    }
+
+
 
 
 
     private IEnumerator shrinkTimer(float timer){
         yield return new WaitForSeconds(timer);
 
-        while(isInLowWall == true){
+        while(resizeValidity == false){
             yield return new WaitForSeconds(.1f);
         }
         transform.localScale = Vector3.one;
         isShrunk = false;
     }
-    private IEnumerator gravityTimer(float timer){
+    private IEnumerator gravityTimer(float timer, PlayerMovement pMove){
         yield return new WaitForSeconds(timer);
+        pMove.NormalizeGravity();
         
-        isShrunk = false;
+        isInverseGravity = false;
     }
 
 
@@ -38,6 +55,10 @@ public class PlayerPowerUpManager : MonoBehaviour{
         return isShrunk;
     }
     public void SwitchLowWallStatus(){
-        isInLowWall = !isInLowWall;
+        resizeValidity = !resizeValidity;
     }
+    public bool GetGravityStatus(){
+        return isInverseGravity;
+    }
+    
 }
