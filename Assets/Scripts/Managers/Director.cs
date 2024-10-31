@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Director : MonoBehaviour{
-    [NonSerialized] public static float GRAVITY = -40;
-
-    
     public static float AdjustPotency(){
         //Will get a random number for testing purposes
         int potency = UnityEngine.Random.Range(0, 101);
@@ -30,7 +27,7 @@ public class Director : MonoBehaviour{
     public static 
     bool IsShrinkValid(float shrinkAmount, GameObject targetObj){
         //All scales should match, so I just chose to use x
-        if ((targetObj.transform.localScale.x - shrinkAmount) <= 0){
+        if ((targetObj.transform.localScale.x - shrinkAmount) <= 0 || targetObj?.GetComponent<PlayerPowerUpManager>().GetShrinkStatus() == true){
             return false;
         }
         else{
