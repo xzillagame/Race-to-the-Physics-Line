@@ -8,56 +8,50 @@ public class PlayerInputHandler : MonoBehaviour
     PlayerInput playerInput;
 
 
-    private void OnEnable()
-    {
-        playerInput = new PlayerInput();
+    //private void OnEnable()
+    //{
+    //    playerInput = new PlayerInput();
 
-        playerInput.GroundMovement.Move.performed += MoveInput;
-        playerInput.GroundMovement.Move.canceled += MoveInput;
+    //    playerInput.GroundMovement.Move.performed += MoveInput;
+    //    playerInput.GroundMovement.Move.canceled += MoveInput;
 
-        playerInput.GroundMovement.Jump.performed += JumpInput;
+    //    playerInput.GroundMovement.Jump.performed += JumpInput;
 
-        playerInput.GroundMovement.Enable();
-    }
+    //    playerInput.GroundMovement.Enable();
+    //}
 
-    private void JumpInput(InputAction.CallbackContext context)
-    {
-        if(context.action.WasPressedThisFrame())
-        {
-            playerMovement.JumpPressed();
-        }
-        else if(context.action.WasReleasedThisFrame())
-        {
-            playerMovement.JumpReleased();
-        }
+    //private void JumpInput(InputAction.CallbackContext context)
+    //{
+    //    if(context.action.WasPressedThisFrame())
+    //    {
+    //        playerMovement.JumpPressed();
+    //    }
+    //    else if(context.action.WasReleasedThisFrame())
+    //    {
+    //        playerMovement.JumpReleased();
+    //    }
 
-    }
+    //}
 
-    private void OnDisable()
-    {
-        playerInput.GroundMovement.Move.performed -= MoveInput;
-        playerInput.GroundMovement.Move.canceled -= MoveInput;
+    //private void OnDisable()
+    //{
+    //    playerInput.GroundMovement.Move.performed -= MoveInput;
+    //    playerInput.GroundMovement.Move.canceled -= MoveInput;
 
-        playerInput.GroundMovement.Jump.performed -= JumpInput;
-    }
+    //    playerInput.GroundMovement.Jump.performed -= JumpInput;
+    //}
 
-    //S.S
-    public void EndGame()
-    {
-        OnDisable();
-    }
-
-    private void MoveInput(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            playerMovement.MovePressed(context.ReadValue<Vector2>());
-        }
-        else if(context.canceled)
-        {
-            playerMovement.MoveReleased();
-        }
-    }
+    //private void MoveInput(InputAction.CallbackContext context)
+    //{
+    //    if(context.performed)
+    //    {
+    //        playerMovement.MovePressed(context.ReadValue<Vector2>());
+    //    }
+    //    else if(context.canceled)
+    //    {
+    //        playerMovement.MoveReleased();
+    //    }
+    //}
 
 
 }

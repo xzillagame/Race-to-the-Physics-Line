@@ -22,6 +22,8 @@ TagManager:
   - 
   - 
   - 
+  - Player1
+  - Player2
   - 
   - 
   - 
@@ -34,10 +36,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player1CullLayer
+  - Player2CullLayer
   m_SortingLayers:
   - name: Default
     uniqueID: 0
