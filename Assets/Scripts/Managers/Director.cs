@@ -1,23 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Director : MonoBehaviour{
     private static bool isGameOver = false;
-    private static PlayerInputHandler[] pInputs;
+    //private static PlayerInputHandler[] pInputs;
+    private static MultiplayerInputManager pInputs;
 
     private void Start(){
-        pInputs = FindObjectsOfType<PlayerInputHandler>();
+        //pInputs = FindObjectsOfType<PlayerInputHandler>();
+        pInputs = FindObjectOfType<MultiplayerInputManager>();
     }
 
 
     public static void EndGame(){
         isGameOver = true;
         //Add stuff to multiplayer
-        foreach(PlayerInputHandler p in pInputs){
-            p.EndGame();
-        }
+        //foreach(PlayerInputHandler p in pInputs){
+        //    p.EndGame();
+        //}
+        pInputs.EndGame();
         //End the game
         Debug.Log("Game Over");
     }
