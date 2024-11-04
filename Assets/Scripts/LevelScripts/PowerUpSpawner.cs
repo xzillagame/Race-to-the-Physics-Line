@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PowerUpSpawner : MonoBehaviour{
     [SerializeField] private GameObject[] prefabs_powerUpsToSpawn;
@@ -40,9 +41,10 @@ public class PowerUpSpawner : MonoBehaviour{
             if(isOnCooldown == false){
                 if(other.gameObject == Director.GetLastPlace()){
                     spawnLimit = baseSpawnAmount + Director.AdjustPotency();
-                    //Call a function to spawn the orbs and
-                    SpawnPowerups(spawnLimit);
-                }   
+                }
+                Debug.Log("Set spawn limit to: " + spawnLimit);
+                //Call a function to spawn the orbs and
+                SpawnPowerups(spawnLimit); 
             }
         }
     }
@@ -52,12 +54,15 @@ public class PowerUpSpawner : MonoBehaviour{
         Debug.Log("Initiating the power up spawning...");
 
         int i = currentSpawnedPowerups.Count;
+        Debug.Log("i = " + i);
         GameObject temp;
+        Vector3 pos;
 
         while(i <= spawnLimit){
             int r = Random.Range(0, prefabs_powerUpsToSpawn.Count());
-            temp = Instantiate(prefabs_powerUpsToSpawn[r]);
-            temp.transform.position += new Vector3(Random.Range(0,3),2 + Random.Range(0,3), Random.Range(0,3));
+            pos = new Vector3(Random.Range(0,3),2 + Random.Range(0,3), Random.Range(0,3));
+
+            temp = Instantiate(prefabs_powerUpsToSpawn[r], pos, transform.rotation);
             Debug.Log("PowerUp has been spawned....");
 
 
