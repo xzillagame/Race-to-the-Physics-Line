@@ -9,6 +9,14 @@ public class MultiplayerInputManager : MonoBehaviour
 
     private PlayerInput multiplayerInput;
 
+
+    public void EndGame()
+    {
+        multiplayerInput.Disable();
+    }
+
+
+
     private void OnEnable()
     {
         multiplayerInput = new PlayerInput();
@@ -47,7 +55,7 @@ public class MultiplayerInputManager : MonoBehaviour
 
         #endregion
 
-        #region Player 1 Remove Event Listeners
+        #region Player 2 Remove Event Listeners
 
         multiplayerInput.Player2Movement.Move.performed -= Player2MoveInput;
         multiplayerInput.Player2Movement.Move.canceled -= Player2MoveInput;
@@ -56,7 +64,6 @@ public class MultiplayerInputManager : MonoBehaviour
 
         #endregion
     }
-
 
     #region Player 1 Functions
 
