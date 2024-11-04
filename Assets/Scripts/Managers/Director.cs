@@ -11,27 +11,34 @@ public class Director : MonoBehaviour{
         pInputs = FindObjectsOfType<PlayerInputHandler>();
     }
 
+    static public GameObject GetLastPlace(){
+        //!Hardcoding the fact that there will only be two players
+        if(pInputs[0].gameObject.transform.position.z < pInputs[1].gameObject.transform.position.z){
+            return pInputs[0].gameObject;
+        }
+        else{
+            return pInputs[1].gameObject;
+        }
+    }
+
 
     public static void EndGame(){
         isGameOver = true;
-        //Add stuff to multiplayer
-        foreach(PlayerInputHandler p in pInputs){
-            p.EndGame();
-        }
         //End the game
+        FindObjectOfType<MultiplayerInputManager>().EndGame();
         Debug.Log("Game Over");
     }
 
-    public static float AdjustPotency(){
+    public static int AdjustPotency(){
         //Will get a random number for testing purposes
-        int potency = UnityEngine.Random.Range(0, 101);
+        ////int potency = UnityEngine.Random.Range(0, 101);
         //0-30 is low distance between players
-        if (potency >= 0 && potency <= 30){
+        if ((pInputs[0].gameObject.transform.position.z - pInputs[1].gameObject.transform.position.z) <= 35){
             Debug.Log("Low distance");
             return 0;
         }
         //31-60 is medium distance between players
-        else if(potency >= 31 && potency <= 60){
+        else if((pInputs[0].gameObject.transform.position.z - pInputs[1].gameObject.transform.position.z) <= 70){
             Debug.Log("Medium distance");
             return 1;
         }

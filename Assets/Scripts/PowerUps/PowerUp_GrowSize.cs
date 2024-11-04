@@ -1,3 +1,5 @@
+/*
+
 using UnityEngine;
 
 public class PowerUp_GrowSize : MonoBehaviour{
@@ -18,3 +20,4 @@ public class PowerUp_GrowSize : MonoBehaviour{
         Destroy(gameObject);
     }
 }
+*/

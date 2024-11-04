@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        playerObjectReferenceHolder = GetComponent<PlayerObjectReferenceHolder>(); //!S.S
         playerTransform = transform;
     }
 

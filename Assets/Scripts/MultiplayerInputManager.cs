@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -114,5 +115,9 @@ public class MultiplayerInputManager : MonoBehaviour
     #endregion
 
 
+    public void EndGame(){
+        //!Player1MoveInput(multiplayerInput.Player1Movement.Move.A);
+        OnDisable();
+    }
 
 }
