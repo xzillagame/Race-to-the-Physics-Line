@@ -23,18 +23,20 @@ public class PowerUpSpawner : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if(isOnCooldown){
+        if(isOnCooldown == true){
             timer += Time.deltaTime;
         }
-        if(timer >= timeBeforeSpawn){
+        if(timer >= timeBeforeSpawn && isOnCooldown == true){
             isOnCooldown = false;
+            timer = 0f;
         }
     }
 
 
     private void OnTriggerEnter(Collider other){
+        Debug.Log("Colliding with spawner");
         //if they are a player
-        if(other.gameObject.GetComponent<PlayerMovement>()){
+        if(other.gameObject.GetComponent<PlayerMovement>() != null){
             if(isOnCooldown == false){
                 if(other.gameObject == Director.GetLastPlace()){
                     spawnLimit = baseSpawnAmount + Director.AdjustPotency();
@@ -47,6 +49,7 @@ public class PowerUpSpawner : MonoBehaviour{
 
 
     private void SpawnPowerups(int spawnLimit){
+        Debug.Log("Initiating the power up spawning...");
 
         int i = currentSpawnedPowerups.Count;
         GameObject temp;
@@ -54,6 +57,8 @@ public class PowerUpSpawner : MonoBehaviour{
         while(i <= spawnLimit){
             int r = Random.Range(0, prefabs_powerUpsToSpawn.Count());
             temp = Instantiate(prefabs_powerUpsToSpawn[r]);
+            temp.transform.position += new Vector3(Random.Range(0,3),2 + Random.Range(0,3), Random.Range(0,3));
+            Debug.Log("PowerUp has been spawned....");
 
 
             if(temp.GetComponent<PowerUp_ShrinkSize>() != null){
@@ -64,7 +69,7 @@ public class PowerUpSpawner : MonoBehaviour{
             }
 
 
-            temp.GetComponent<Rigidbody>().AddForce(Vector3.up + new Vector3 (0,Director.AdjustPotency(),0), ForceMode.Impulse);
+            temp.GetComponent<Rigidbody>().AddForce(new Vector3 (Random.Range(0,3) ,Director.AdjustPotency() + Random.Range(0,3), Random.Range(0,3)), ForceMode.Impulse);
             currentSpawnedPowerups.Add(temp);
         }
 

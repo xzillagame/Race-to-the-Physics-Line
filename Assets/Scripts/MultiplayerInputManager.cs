@@ -121,10 +121,4 @@ public class MultiplayerInputManager : MonoBehaviour
 
     #endregion
 
-
-    public void EndGame(){
-        //!Player1MoveInput(multiplayerInput.Player1Movement.Move.A);
-        OnDisable();
-    }
-
 }
