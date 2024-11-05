@@ -40,7 +40,10 @@ public class PowerUpSpawner : MonoBehaviour{
         if(other.gameObject.GetComponent<PlayerMovement>() != null){
             if(isOnCooldown == false){
                 if(other.gameObject == Director.GetLastPlace()){
-                    spawnLimit = baseSpawnAmount + Director.AdjustPotency();
+                    spawnLimit = baseSpawnAmount + Director.AdjustPotency()+1;
+                }
+                else{
+                    spawnLimit = baseSpawnAmount;
                 }
                 Debug.Log("Set spawn limit to: " + spawnLimit);
                 //Call a function to spawn the orbs and
@@ -76,6 +79,8 @@ public class PowerUpSpawner : MonoBehaviour{
 
             temp.GetComponent<Rigidbody>().AddForce(new Vector3 (Random.Range(0,3) ,Director.AdjustPotency() + Random.Range(0,3), Random.Range(0,3)), ForceMode.Impulse);
             currentSpawnedPowerups.Add(temp);
+
+            i++; //Was causing an infinite loop....
         }
 
         isOnCooldown = true;
