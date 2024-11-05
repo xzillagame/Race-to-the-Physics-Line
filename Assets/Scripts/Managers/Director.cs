@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Director : MonoBehaviour{
-    private static bool isGameOver = false;
+    //private static bool isGameOver = false;
     private static PlayerInputHandler[] pInputs;
 
     private void Start(){
@@ -23,7 +23,7 @@ public class Director : MonoBehaviour{
 
 
     public static void EndGame(){
-        isGameOver = true;
+        ////isGameOver = true;
         //End the game
         FindObjectOfType<MultiplayerInputManager>().EndGame();
         Debug.Log("Game Over");
@@ -34,17 +34,17 @@ public class Director : MonoBehaviour{
         ////int potency = UnityEngine.Random.Range(0, 101);
         //0-30 is low distance between players
         if ((pInputs[0].gameObject.transform.position.z - pInputs[1].gameObject.transform.position.z) <= 35){
-            Debug.Log("Low distance");
+            ////Debug.Log("Low distance");
             return 0;
         }
         //31-60 is medium distance between players
         else if((pInputs[0].gameObject.transform.position.z - pInputs[1].gameObject.transform.position.z) <= 70){
-            Debug.Log("Medium distance");
+            ////Debug.Log("Medium distance");
             return 1;
         }
         //61+ is high distance for players
         else{
-            Debug.Log("High distance");
+            ////Debug.Log("High distance");
             return 2;
         }
     }

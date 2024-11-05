@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PowerUp_GrowSize
+  m_Name: PowerUp_Speed
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 2100000, guid: 5e1f549f2c6a60a448ae89796bf02ef4, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -28,5 +28,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 1, g: 0.34528297, b: 0.34528297, a: 0.44705883}
+    - _Color: {r: 1, g: 0.34509802, b: 0.4125318, a: 0.44705883}
   m_BuildTextureStacks: []

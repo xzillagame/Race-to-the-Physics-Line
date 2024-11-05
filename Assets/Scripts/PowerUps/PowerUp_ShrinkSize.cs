@@ -10,6 +10,8 @@ public class PowerUp_ShrinkSize : MonoBehaviour{
     const float baseWaitTime = 2f;
     [SerializeField] float waitTime;
 
+    
+
     private void AdjustWaitTime(){
         waitTime = baseWaitTime + Director.AdjustPotency();
     }

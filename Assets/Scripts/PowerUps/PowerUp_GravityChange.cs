@@ -8,6 +8,8 @@ public class PowerUp_GravityChange : MonoBehaviour{
     const float baseWaitTime = 2f;
     private float waitTime;
 
+    
+
     private void AdjustWaitTime(){
         waitTime = baseWaitTime + Director.AdjustPotency();
     }
