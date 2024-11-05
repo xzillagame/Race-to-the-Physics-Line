@@ -17,8 +17,11 @@ public class PowerUp_GravityChange : MonoBehaviour{
 
         if (p.GetGravityStatus() == false){
 
-            AdjustWaitTime();
+            parentSpawner.GetComponent<PowerUpSpawner>().RemovePowerUpFromList(gameObject);
             Destroy(gameObject);
+
+
+            AdjustWaitTime();
             p.FlipGravity(waitTime, p?.GetComponent<PlayerMovement>());
         }
     }

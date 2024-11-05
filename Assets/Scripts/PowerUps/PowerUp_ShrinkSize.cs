@@ -30,7 +30,7 @@ public class PowerUp_ShrinkSize : MonoBehaviour{
                 AdjustWaitTime();
                 other.gameObject?.GetComponent<PlayerPowerUpManager>().ShrinkSize(baseTargetShrinkage, waitTime);
 
-
+                parentSpawner.GetComponent<PowerUpSpawner>().RemovePowerUpFromList(gameObject);
                 Destroy(gameObject);
             }
         }
