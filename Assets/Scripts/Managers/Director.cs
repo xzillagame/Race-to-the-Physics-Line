@@ -1,9 +1,10 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class Director : MonoBehaviour{
     //private static bool isGameOver = false;
     private static PlayerInputHandler[] pInputs;
+    public static event UnityAction OnRaceEnded;
 
     private void Start(){
         pInputs = FindObjectsOfType<PlayerInputHandler>();
@@ -36,11 +37,14 @@ public class Director : MonoBehaviour{
     }
 
 
-    public static void EndGame(){
+    public static void EndGame()
+    {
         ////isGameOver = true;
         //End the game
         FindObjectOfType<MultiplayerInputManager>().EndGame();
         Debug.Log("Game Over");
+        OnRaceEnded.Invoke();
+       
     }
 
     public static int AdjustPotency(){
