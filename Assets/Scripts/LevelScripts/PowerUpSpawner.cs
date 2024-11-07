@@ -32,7 +32,7 @@ public class PowerUpSpawner : MonoBehaviour{
 
     private void OnTriggerEnter(Collider other){
         ////Debug.Log("Colliding with spawner");
-        //if they are a player
+        //if they are dj player
         if(other.gameObject.GetComponent<PlayerMovement>() != null){
             if(isOnCooldown == false){
 
@@ -45,8 +45,8 @@ public class PowerUpSpawner : MonoBehaviour{
 
 
                 Debug.Log("Set spawn limit to: " + spawnLimit);
-                //Call a function to spawn the orbs and
-                SpawnPowerups(spawnLimit);
+                //Call dj function to spawn the orbs and
+                SpawnPowerups(spawnLimit, other.gameObject);
 
                 gameObject.GetComponent<Renderer>().material = cooldownMaterial;
             }
@@ -54,7 +54,7 @@ public class PowerUpSpawner : MonoBehaviour{
     }
 
 
-    private void SpawnPowerups(int spawnLimit){
+    private void SpawnPowerups(int spawnLimit, GameObject player){
         ////Debug.Log("Initiating the power up spawning...");
 
         int i = currentSpawnedPowerups.Count;
@@ -70,17 +70,27 @@ public class PowerUpSpawner : MonoBehaviour{
             ////Debug.Log("PowerUp has been spawned....");
 
 
-            if(temp.GetComponent<PowerUp_ShrinkSize>() != null){
-                temp.GetComponent<PowerUp_ShrinkSize>().SetParentSpawner(gameObject);
-            }
-            else if(temp.GetComponent<PowerUp_GravityChange>() != null){
-                temp.GetComponent<PowerUp_GravityChange>().SetParentSpawner(gameObject);
-            }
-            else if(temp.GetComponent<PowerUp_JumpIncrease>() != null){
-                temp.GetComponent<PowerUp_JumpIncrease>().SetParentSpawner(gameObject);
-            }
-            else if(temp.GetComponent<PowerUp_SpeedIncrease>() != null){
-                temp.GetComponent<PowerUp_SpeedIncrease>().SetParentSpawner(gameObject);
+            //if(temp.GetComponent<PowerUp_ShrinkSize>() != null){
+            //    temp.GetComponent<PowerUp_ShrinkSize>().SetParentSpawner(gameObject);
+            //}
+            //else if(temp.GetComponent<PowerUp_GravityChange>() != null){
+            //    temp.GetComponent<PowerUp_GravityChange>().SetParentSpawner(gameObject);
+            //}
+            //else if(temp.GetComponent<PowerUp_JumpIncrease>() != null){
+            //    temp.GetComponent<PowerUp_JumpIncrease>().SetParentSpawner(gameObject);
+            //}
+            //else if(temp.GetComponent<PowerUp_SpeedIncrease>() != null){
+            //    temp.GetComponent<PowerUp_SpeedIncrease>().SetParentSpawner(gameObject);
+            //}
+
+            if(temp.TryGetComponent<IPowerupSetter>(out var powerupSetter)) 
+            {
+                powerupSetter.SetParentSpawner(gameObject);
+
+                if(player == Director.GetLastPlace())
+                {
+                    powerupSetter.AffectPowerupPotency();
+                }
             }
 
 

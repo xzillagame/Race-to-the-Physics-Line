@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3560fc153b8f66a49b3f46b929335daf, type: 3}
   m_Name: Player Default Starting Stats
   m_EditorClassIdentifier: 
-  <StartingMovementSpeed>k__BackingField: 5
-  <StartingJumpStrength>k__BackingField: 10
+  <StartingMovementSpeed>k__BackingField: 7
+  <StartingJumpStrength>k__BackingField: 25
   <StartingGravityStrength>k__BackingField: -50

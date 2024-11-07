@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp_SpeedIncrease : MonoBehaviour{
+public class PowerUp_SpeedIncrease : MonoBehaviour, IPowerupSetter
+{
     private GameObject parentSpawner;
     private const int baseIncrease = 1;
-    private int statIncrease;
+    [SerializeField] private int statIncrease;
 
-    
+    private void OnEnable()
+    {
+        statIncrease = baseIncrease;
+    }
+
 
     private void AdjustStatIncrease(){
         statIncrease = baseIncrease + Director.AdjustPotency();
@@ -27,5 +32,10 @@ public class PowerUp_SpeedIncrease : MonoBehaviour{
 
     public void SetParentSpawner(GameObject spawner){
         parentSpawner = spawner;
+    }
+
+    public void AffectPowerupPotency()
+    {
+        AdjustStatIncrease();
     }
 }

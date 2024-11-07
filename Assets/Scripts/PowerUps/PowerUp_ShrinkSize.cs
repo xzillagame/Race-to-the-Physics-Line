@@ -4,13 +4,19 @@ using System.ComponentModel;
 using Unity.Collections;
 using UnityEngine;
 
-public class PowerUp_ShrinkSize : MonoBehaviour{
+public class PowerUp_ShrinkSize : MonoBehaviour, IPowerupSetter
+{
     private GameObject parentSpawner;
     const float baseTargetShrinkage = .5f;
     const float baseWaitTime = 2f;
     [SerializeField] float waitTime;
 
-    
+
+    private void OnEnable()
+    {
+        waitTime = baseWaitTime;
+    }
+
 
     private void AdjustWaitTime(){
         waitTime = baseWaitTime + Director.AdjustPotency();
@@ -42,14 +48,8 @@ public class PowerUp_ShrinkSize : MonoBehaviour{
         parentSpawner = spawner;
     }
 
-
-
-
-
-
-
-
-
-
-
+    public void AffectPowerupPotency()
+    {
+        AdjustWaitTime();
+    }
 }

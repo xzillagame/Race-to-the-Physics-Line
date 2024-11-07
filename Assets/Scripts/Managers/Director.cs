@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Director : MonoBehaviour{
     //private static bool isGameOver = false;
@@ -21,6 +19,22 @@ public class Director : MonoBehaviour{
         }
     }
 
+    private static GameObject GetFirstPlace()
+    {
+        PlayerInputHandler lastPlacePlayer = GetLastPlace().GetComponent<PlayerInputHandler>();
+
+        //Last place player is the first player in the array index
+        if(lastPlacePlayer == pInputs[0]) 
+        {
+            return pInputs[1].gameObject;
+        }
+        else
+        {
+            return pInputs[0].gameObject;
+        }
+
+    }
+
 
     public static void EndGame(){
         ////isGameOver = true;
@@ -33,12 +47,17 @@ public class Director : MonoBehaviour{
         //Will get a random number for testing purposes
         ////int potency = UnityEngine.Random.Range(0, 101);
         //0-30 is low distance between players
-        if ((pInputs[0].gameObject.transform.position.z - pInputs[1].gameObject.transform.position.z) <= 35){
+
+        GameObject firstPlacePlayer = GetFirstPlace();
+        GameObject lastPlacePlayer = GetLastPlace();
+
+
+        if ((firstPlacePlayer.transform.position.z - lastPlacePlayer.transform.position.z) <= 35){
             ////Debug.Log("Low distance");
             return 0;
         }
         //31-60 is medium distance between players
-        else if((pInputs[0].gameObject.transform.position.z - pInputs[1].gameObject.transform.position.z) <= 70){
+        else if((firstPlacePlayer.transform.position.z - lastPlacePlayer.transform.position.z) <= 70){
             ////Debug.Log("Medium distance");
             return 1;
         }
